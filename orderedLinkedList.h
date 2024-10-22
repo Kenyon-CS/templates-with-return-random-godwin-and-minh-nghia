@@ -194,6 +194,45 @@ void orderedLinkedList<Type>::deleteNode(const Type& deleteItem)
                 cout << "The item to be deleted is not in the "
                      << "list." << endl;
     }
+
 }//end deleteNode
+template <typename Type>
+void orderedLinkedList<Type>::mergeLists(orderedLinkedList<Type>& list1, 
+                                         orderedLinkedList<Type>& list2) {
+    // Initialize pointers to traverse through the two lists
+    nodeType<Type>* current1 = list1.first;
+    nodeType<Type>* current2 = list2.first;
+    nodeType<Type>* last = nullptr;  // Keeps track of the last node in the merged list
+
+    // Clear the current list (newList) before merging
+    this->destroyList();
+
+    // Merge elements from both lists in sorted order
+    while (current1 != nullptr && current2 != nullptr) {
+        if (current1->info <= current2->info) {
+            this->insert(current1->info);  // Insert from list1
+            current1 = current1->link;
+        } else {
+            this->insert(current2->info);  // Insert from list2
+            current2 = current2->link;
+        }
+    }
+
+    // Add remaining elements from list1, if any
+    while (current1 != nullptr) {
+        this->insert(current1->info);
+        current1 = current1->link;
+    }
+
+    // Add remaining elements from list2, if any
+    while (current2 != nullptr) {
+        this->insert(current2->info);
+        current2 = current2->link;
+    }
+
+    // After merging, list1 and list2 should be empty
+    list1.destroyList();
+    list2.destroyList();
+}
 
 #endif

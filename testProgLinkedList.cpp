@@ -13,10 +13,10 @@ using namespace std;                            //Line 3
 
 int main()                                      //Line 4
 {
-    orderedLinkedList<int> list1, list2;        //Line 5
+    orderedLinkedList<int> list1, list2, newList;        //Line 5
     int num;                                    //Line 6
 
-    cout << "Line 7: Enter numbers ending "
+    cout << "To create list1, please enter numbers ending "
          << "with -999." << endl;               //Line 7
     cin >> num;                                 //Line 8
 
@@ -28,27 +28,30 @@ int main()                                      //Line 4
 
     cout << endl;                               //Line 14
 
-    cout << "Line 15: list1: ";                 //Line 15
+    cout << "List1 is: ";                 //Line 15
     list1.print();                              //Line 16
     cout << endl;                               //Line 17
 
-    list2 = list1; //test the assignment operator Line 18
+    cout << "To create list2, please enter numbers ending "
+            << "with -999." << endl;               //Line 7
+        cin >> num;                                 //Line 8
 
-    cout << "Line 19: list2: ";                 //Line 19
+        while (num != -999)                         //Line 9
+        {                                           //Line 10
+            list2.insert(num);                      //Line 11
+            cin >> num;                             //Line 12
+        }                                           //Line 13
+
+    cout << endl; 
+
+    cout << "List2 is: ";                 //Line 19
     list2.print();                              //Line 20
-    cout << endl;                               //Line 21
+    cout << endl;                               //Line 21                          //Line 28
 
-    cout << "Line 22: Enter the number to be "
-         << "deleted: ";                        //Line 22
-    cin >> num;                                 //Line 23
-    cout << endl;                               //Line 24
+    newList.mergeLists(list1, list2);
 
-    list2.deleteNode(num);                      //Line 25
-
-    cout << "Line 26: After deleting "
-         << num << ", list2: " << endl;         //Line 26
-    list2.print();                              //Line 27
-    cout << endl;                               //Line 28
+    cout << "The new list after merging list1 and list 2 is:" << endl;
+    newList.print(); 
 
     return 0;					                //Line 29
 }                                               //Line 30

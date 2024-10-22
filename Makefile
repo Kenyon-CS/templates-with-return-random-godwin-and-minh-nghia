@@ -1,28 +1,32 @@
-# Variables
+# Compiler
 CXX = g++
-CXXFLAGS = -Wall -std=c++11
-TARGET = test_random
-SRCS = test.cpp
-OBJS = $(SRCS:.cpp=.o)
 
-# Default target
+# Compiler flags
+CXXFLAGS = -Wall -std=c++11
+
+# Target executable
+TARGET = orderedlinkedlist_demo
+
+# Source files
+SRC = testProgLinkedList.cpp
+
+# Object files (generated from the source files)
+OBJ = $(SRC:.cpp=.o)
+
+# Default rule to build the target executable
 all: $(TARGET)
 
-# Link object files to create the executable
-$(TARGET): $(OBJS)
-	$(CXX) $(CXXFLAGS) -o $(TARGET) $(OBJS)
+# Rule to build the target executable from object files
+$(TARGET): $(OBJ)
+	$(CXX) $(CXXFLAGS) -o $(TARGET) $(OBJ)
 
-# Compile source files to object files
+# Rule to build the object files from the source files
 %.o: %.cpp
 	$(CXX) $(CXXFLAGS) -c $< -o $@
 
-# Clean up the generated files
+# Clean up the build files
 clean:
-	rm -f $(OBJS) $(TARGET)
+	rm -f $(OBJ) $(TARGET)
 
-# Run the program
-run: $(TARGET)
-	./$(TARGET)
-
-# Phony targets to avoid conflicts with files named 'clean' or 'all'
-.PHONY: all clean run
+# Rebuild the project from scratch
+rebuild: clean all
